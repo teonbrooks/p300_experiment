@@ -1,0 +1,12 @@
+{
+    "name": "cloudbrain_p300_task",
+    "alt_name": "P300 Task",
+    "description": "Adapted P300 from Alexandre Barachant",
+    "version": "1.0.1",
+    "repository": {"type": "git", "url": "https://github.com/exprxiv/expfactory_adaptive_n_back.git"},
+    "contributors": ["Teon L Brooks", "Marion Le Borgne"],
+    "duration": "20",
+    "engine": {"front-end": "jspsych"},
+    "ontology": [ {"convention": "Cognitive Atlas", "term": "n/a"} ],
+    "reference": "n/a"
+}
