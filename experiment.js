@@ -30,36 +30,42 @@ for (counter = 0; counter < n_trials; counter++){
     stimuli_order.push(Math.random() > prob)
 };
 
-var stim_list = []
-for (counter = 0; counter < n_trials; counter++){
-  if (stimuli_order[counter] == true) {
-    photo_idx = getRandomInt(0, targets.length);
-    var trial = {
-      stimulus: targets[photo_idx],
-      on_start: function(){
-        console.log('target')
-      },
-      on_finish: function(data){
-        data.correct = data.key_press === jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
-        // console.log(data.correct);
-      }
-    };
-  } else {
-    photo_idx = getRandomInt(0, nontargets.length);
-    var trial = {
-      stimulus: nontargets[photo_idx],
-      on_start: function(){
-        console.log('nontarget')
-      },
-      on_finish: function(data){
-        data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f');
-        // console.log(data.correct);
-      }
-    };
-  };
-  stim_list.push(trial);
-};
 
+var createTimeline = function createTimeline(onStartCallback) {
+  var stim_list = []
+  for (counter = 0; counter < n_trials; counter++){
+    if (stimuli_order[counter] == true) {
+      photo_idx = getRandomInt(0, targets.length);
+      var trial = {
+        stimulus: targets[photo_idx],
+        on_start: function(){onStartCallback('target')},
+        on_finish: function(data){
+          data.correct = data.key_press === jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
+          // console.log(data.correct);
+        }
+      };
+    } else {
+      photo_idx = getRandomInt(0, nontargets.length);
+      var trial = {
+        stimulus: nontargets[photo_idx],
+        on_start: function(){onStartCallback('non-target')},
+        on_finish: function(data){
+          data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f');
+          // console.log(data.correct);
+        }
+      };
+    };
+    stim_list.push(trial);
+  };
+
+  return timeline, stim_list;
+}
+
+var onStartCallback = function(target){
+ console.log(target)
+}
+
+var timeline, stim_list = createTimeline(onStartCallback)
 
 /* create timeline */
 var timeline = [];
@@ -102,6 +108,7 @@ var test_trials = {
 
 // timeline.push(test_trials);
 timeline = timeline.concat(test_trials);
+
 /* define debrief */
 var debrief_block = {
   type: "html-keyboard-response",
@@ -116,8 +123,10 @@ var debrief_block = {
   }
 };
 timeline.push(debrief_block);
+
 /* start the experiment */
 jsPsych.init({
+  display_element: 'test',
   timeline: timeline,
   default_iti: 3000,
   on_finish: function() {
