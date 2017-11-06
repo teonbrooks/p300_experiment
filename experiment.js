@@ -36,6 +36,9 @@ for (counter = 0; counter < n_trials; counter++){
     photo_idx = getRandomInt(0, targets.length);
     var trial = {
       stimulus: targets[photo_idx],
+      on_start: function(){
+        console.log('target')
+      },
       on_finish: function(data){
         data.correct = data.key_press === jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
         // console.log(data.correct);
@@ -45,6 +48,9 @@ for (counter = 0; counter < n_trials; counter++){
     photo_idx = getRandomInt(0, nontargets.length);
     var trial = {
       stimulus: nontargets[photo_idx],
+      on_start: function(){
+        console.log('nontarget')
+      },
       on_finish: function(data){
         data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('f');
         // console.log(data.correct);
@@ -88,10 +94,7 @@ var test_trials = {
   choices: ['f', 'j'],
   trial_duration: trial_duration,
   stimulus_duration: stim_duration,
-  post_trial_gap: post_trial_gap(),
-  on_start: function(){
-    console.log('testing')
-  }
+  post_trial_gap: post_trial_gap()
   // on_finish: function(data){
   //   data.correct = data.key_press == trial.correct_response
   // }

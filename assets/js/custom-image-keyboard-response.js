@@ -67,6 +67,7 @@ jsPsych.plugins["custom-image-keyboard-response"] = (function() {
     // add prompt
     new_html += trial.prompt;
 
+    // add option for on_start parameter in the experiment
     if (typeof trial.on_start === 'function'){
       trial.on_start.call()
     } else if (typeof trial.on_start !== 'undefined') {
