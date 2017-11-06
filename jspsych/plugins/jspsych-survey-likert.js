@@ -19,6 +19,7 @@ jsPsych.plugins['survey-likert'] = (function() {
       questions: {
         type: jsPsych.plugins.parameterType.COMPLEX,
         array: true,
+        pretty_name: 'Questions',
         nested: {
           prompt: {type: jsPsych.plugins.parameterType.STRING,
                      pretty_name: 'Prompt',
@@ -44,7 +45,7 @@ jsPsych.plugins['survey-likert'] = (function() {
       button_label: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Button label',
-        default: 'Next',
+        default:  'Continue',
         description: 'Label of the button.'
       }
     }
