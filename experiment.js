@@ -33,7 +33,7 @@ for (counter = 0; counter < n_trials; counter++){
 var stim_list = []
 for (counter = 0; counter < n_trials; counter++){
   if (stimuli_order[counter] == true) {
-    photo_idx = getRandomInt(0, targets.length);
+    let photo_idx = getRandomInt(0, targets.length);
     var trial = {
       stimulus: targets[photo_idx],
       on_start: function(){
@@ -45,7 +45,7 @@ for (counter = 0; counter < n_trials; counter++){
       }
     };
   } else {
-    photo_idx = getRandomInt(0, nontargets.length);
+    let photo_idx = getRandomInt(0, nontargets.length);
     var trial = {
       stimulus: nontargets[photo_idx],
       on_start: function(){

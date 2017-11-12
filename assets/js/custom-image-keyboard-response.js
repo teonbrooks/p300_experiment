@@ -8,9 +8,17 @@
  * documentation: docs.jspsych.org
  *
  **/
+const jsPsych = window.jsPsych || require('jspsych');
 
-
-jsPsych.plugins["custom-image-keyboard-response"] = (function() {
+(function (root, factory) {
+  if(typeof define === "function" && define.amd) {
+     define([], factory);
+  } else if(typeof module === "object" && module.exports) {
+     module.exports = factory;
+  } else {
+     root.jsPsych.plugins["custom-image-keyboard-response"] = factory;
+  }
+}(this, (function() {
 
   var plugin = {};
 
@@ -153,4 +161,5 @@ jsPsych.plugins["custom-image-keyboard-response"] = (function() {
   };
 
   return plugin;
-})();
+})()  //Close IIFE
+));
